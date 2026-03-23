@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pk:#FF1774;
+  --pk-dark:#D4005E;
+  --pk-light:#FFF0F5;
+  --pk-mid:#FFD6E7;
+  --text:#282828;
+  --muted:#666;
+  --border:#EDEDED;
+  --white:#fff;
+  --bg:#FAFAFA;
+  --gold:#B8860B;
+  --green:#1B873E;
+}
+body{font-family:'Nunito Sans',sans-serif;background:var(--white);color:var(--text);font-size:14px;min-height:100vh}
+
+/* ── TOP BAR ── */
+.topbar{background:var(--pk);color:#fff;text-align:center;font-size:11px;font-weight:600;padding:7px;letter-spacing:0.4px}
+
+/* ── MAIN NAV ── */
+.nav{background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.25rem;height:60px;gap:1rem;position:sticky;top:0;z-index:200}
+.nav-logo{display:flex;align-items:center;gap:3px;flex-shrink:0}
+.logo-svg{height:26px;width:auto}
+.nav-search{flex:1;max-width:480px;display:flex;align-items:center;background:#F5F5F5;border:1px solid #E0E0E0;border-radius:4px;overflow:hidden;height:38px}
+.nav-search input{flex:1;border:none;background:transparent;padding:0 12px;font-size:13px;font-family:'Nunito Sans',sans-serif;color:var(--text);outline:none}
+.search-btn{background:var(--pk);border:none;color:#fff;width:42px;height:38px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.nav-icons{display:flex;align-items:center;gap:18px;margin-left:auto}
+.nav-icon{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;color:var(--text);font-size:10px;font-weight:600;letter-spacing:0.3px}
+.nav-icon svg{width:22px;height:22px}
+.nav-icon:hover{color:var(--pk)}
+
+/* ── CATEGORY NAV ── */
+.cat-nav{background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none;padding:0 1rem}
+.cat-nav::-webkit-scrollbar{display:none}
+.cat-item{padding:12px 16px;font-size:12px;font-weight:700;color:var(--text);white-space:nowrap;cursor:pointer;border-bottom:2px solid transparent;letter-spacing:0.2px;transition:all 0.15s}
+.cat-item:hover,.cat-item.active{color:var(--pk);border-bottom-color:var(--pk)}
+
+/* ── PAGES ── */
+.page{display:none;animation:fi 0.25s ease}
+.page.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HERO BANNER ── */
+.hero-banner{background:linear-gradient(110deg,#1A0A10 0%,#3B0A1F 55%,#6B1030 100%);padding:2.5rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;position:relative;overflow:hidden;min-height:240px}
+.hero-banner::after{content:'';position:absolute;right:0;top:0;width:50%;height:100%;background:radial-gradient(ellipse at right center,rgba(255,23,116,0.2),transparent 70%)}
+.hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.5);text-transform:uppercase;margin-bottom:10px}
+.hero-h{font-size:28px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px}
+.hero-h span{color:var(--pk)}
+.hero-sub{font-size:12px;color:rgba(255,255,255,0.55);line-height:1.7;margin-bottom:1.25rem;font-weight:400}
+.btn-pk{display:inline-block;background:var(--pk);color:#fff;border:none;border-radius:4px;padding:11px 24px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito Sans',sans-serif;letter-spacing:0.3px;transition:background 0.15s}
+.btn-pk:hover{background:var(--pk-dark)}
+.btn-ghost{display:inline-block;background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.3);border-radius:4px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Nunito Sans',sans-serif;transition:all 0.15s;margin-left:8px}
+.btn-ghost:hover{border-color:#fff}
+.hero-right{display:flex;justify-content:flex-end;align-items:center}
+.hero-badge-cluster{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hero-badge{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:14px 12px;text-align:center}
+.hero-badge-num{font-size:20px;font-weight:700;color:#fff}
+.hero-badge-lbl{font-size:9px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;margin-top:2px}
+.hero-badge-delta{font-size:9px;color:#4CAF50;margin-top:2px;font-weight:600}
+
+/* ── OFFER STRIP ── */
+.offer-strip{background:var(--pk-light);border-bottom:1px solid var(--pk-mid);display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.offer-strip::-webkit-scrollbar{display:none}
+.offer-pill{padding:9px 18px;font-size:11px;font-weight:700;color:var(--pk);white-space:nowrap;border-right:1px solid var(--pk-mid);cursor:pointer}
+.offer-pill:hover{background:var(--pk-mid)}
+
+/* ── SECTION ── */
+.sec{padding:1.5rem 1.25rem}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1rem}
+.sec-title{font-size:16px;font-weight:700;color:var(--text)}
+.sec-viewall{font-size:12px;color:var(--pk);font-weight:700;cursor:pointer}
+
+/* ── PRODUCT CARDS ── */
+.prod-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.prod-row::-webkit-scrollbar{display:none}
+.prod-card{min-width:140px;max-width:140px;background:#fff;border:1px solid var(--border);border-radius:4px;overflow:hidden;cursor:pointer;flex-shrink:0;transition:box-shadow 0.2s}
+.prod-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.1)}
+.prod-img{height:140px;display:flex;align-items:center;justify-content:center;background:#FBF7F8;font-size:42px;position:relative}
+.prod-wish{position:absolute;top:6px;right:6px;width:24px;height:24px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;box-shadow:0 1px 4px rgba(0,0,0,0.15)}
+.prod-badge{position:absolute;top:6px;left:0;background:var(--pk);color:#fff;font-size:9px;font-weight:700;padding:3px 7px;letter-spacing:0.3px}
+.prod-info{padding:8px 10px}
+.prod-brand{font-size:10px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:0.4px}
+.prod-name{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.prod-price{font-size:13px;font-weight:700;color:var(--text);margin-top:5px}
+.prod-mrp{font-size:10px;color:var(--muted);text-decoration:line-through;margin-left:5px;font-weight:400}
+.prod-disc{font-size:10px;color:var(--green);font-weight:700;margin-left:3px}
+.prod-rating{display:flex;align-items:center;gap:3px;margin-top:4px}
+.rating-chip{background:#F5F5F5;border-radius:2px;padding:2px 5px;font-size:10px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:2px}
+.rating-star{color:#FFB300;font-size:10px}
+.rating-count{color:var(--muted);font-size:10px}
+
+/* ── CATEGORY GRID ── */
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.cat-tile{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer;transition:all 0.2s;text-align:center}
+.cat-tile:hover{border-color:var(--pk);box-shadow:0 2px 8px rgba(255,23,116,0.1)}
+.cat-tile-img{height:70px;display:flex;align-items:center;justify-content:center;font-size:32px}
+.cat-tile-label{font-size:11px;font-weight:700;padding:6px 4px;color:var(--text)}
+
+/* ── FEATURE STRIP ── */
+.feat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:0}
+.feat-item{background:#fff;padding:14px 10px;text-align:center}
+.feat-icon{font-size:20px;margin-bottom:5px}
+.feat-title{font-size:11px;font-weight:700;color:var(--text);margin-bottom:2px}
+.feat-sub{font-size:10px;color:var(--muted)}
+
+/* ── PHYGITAL CARDS ── */
+.phy-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.phy-card{background:#fff;border:1px solid var(--border);border-radius:6px;padding:14px;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden}
+.phy-card:hover{border-color:var(--pk)}
+.phy-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--pk)}
+.phy-card-icon{font-size:22px;margin-bottom:8px}
+.phy-card-title{font-size:13px;font-weight:700;margin-bottom:4px}
+.phy-card-desc{font-size:11px;color:var(--muted);line-height:1.6}
+.phy-card-tag{display:inline-block;margin-top:8px;font-size:9px;font-weight:700;padding:3px 8px;border-radius:2px;text-transform:uppercase;letter-spacing:0.4px}
+.tag-new{background:var(--pk-light);color:var(--pk)}
+.tag-live{background:#E8F5E9;color:var(--green)}
+.tag-beta{background:#FFF8E1;color:var(--gold)}
+
+/* ── CART ITEMS ── */
+.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.cart-item:last-child{border-bottom:none}
+.ci-img{width:64px;height:64px;background:#FBF7F8;border-radius:4px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.ci-info{flex:1}
+.ci-brand{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;color:var(--text)}
+.ci-name{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.4}
+.ci-price{font-size:14px;font-weight:700;margin-top:5px}
+.ci-tag{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:2px;margin-left:6px;text-transform:uppercase}
+.ci-online{background:#E3F2FD;color:#1565C0}
+.ci-store{background:#E8F5E9;color:var(--green)}
+
+/* ── AI PAGE ── */
+.ai-skin-card{background:linear-gradient(135deg,#1A0A10,#4A1030);border-radius:8px;padding:1.5rem;color:#fff;margin-bottom:1rem;position:relative;overflow:hidden}
+.ai-skin-card::after{content:'';position:absolute;right:-30px;bottom:-30px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(255,23,116,0.3),transparent 70%)}
+.ai-tag{display:inline-block;background:rgba(255,23,116,0.2);border:1px solid rgba(255,23,116,0.4);color:#FF7BAC;font-size:9px;font-weight:700;padding:3px 10px;border-radius:2px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.ai-h{font-size:20px;font-weight:700;margin-bottom:6px;line-height:1.25}
+.ai-sub{font-size:11px;color:rgba(255,255,255,0.45);margin-bottom:1rem;line-height:1.6}
+.skin-attrs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:1rem}
+.skin-attr{background:rgba(255,255,255,0.07);border-radius:6px;padding:10px}
+.sa-lbl{font-size:9px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.sa-val{font-size:13px;font-weight:700}
+.sa-bar{height:3px;background:rgba(255,255,255,0.1);border-radius:10px;margin-top:6px}
+.sa-fill{height:100%;border-radius:10px;background:var(--pk)}
+
+/* ── LOYALTY PAGE ── */
+.loy-card{background:linear-gradient(135deg,#1A0A10,#3B0F20);border-radius:8px;overflow:hidden;margin:1.25rem;border:1px solid rgba(255,23,116,0.2)}
+.loy-top{padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center}
+.loy-tier{font-size:20px;font-weight:700;color:#FFD700;letter-spacing:0.5px}
+.loy-tier-sub{font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px;text-transform:uppercase;letter-spacing:0.5px}
+.loy-pts{text-align:right}
+.loy-pts-n{font-size:28px;font-weight:700;color:#fff;line-height:1}
+.loy-pts-l{font-size:9px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;margin-top:3px}
+.loy-prog{padding:0 1.5rem 1.25rem}
+.prog-labels{display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:6px}
+.prog-bar{height:4px;background:rgba(255,255,255,0.1);border-radius:10px}
+.prog-fill{height:100%;border-radius:10px;background:var(--pk);width:69%}
+.sync-bar{margin:0 1.5rem 1.25rem;background:rgba(255,255,255,0.05);border-radius:6px;padding:10px 12px;display:flex;gap:8px;align-items:center}
+.sync-dot{width:7px;height:7px;border-radius:50%;background:#4CAF50;flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.sync-txt{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5}
+.sync-txt strong{color:rgba(255,255,255,0.8);font-weight:700}
+
+.tier-row{display:flex;border-bottom:1px solid var(--border)}
+.tier-col{flex:1;padding:12px 10px;text-align:center;border-right:1px solid var(--border)}
+.tier-col:last-child{border-right:none}
+.tier-dot{width:10px;height:10px;border-radius:50%;margin:0 auto 5px}
+.tier-name{font-size:13px;font-weight:700;margin-bottom:3px}
+.tier-range{font-size:9px;color:var(--muted);margin-bottom:6px}
+.tier-perk{font-size:10px;color:var(--muted);line-height:1.7}
+
+.perk-list{padding:0 1.25rem 1rem}
+.perk-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.perk-item:last-child{border-bottom:none}
+.perk-ico{width:38px;height:38px;border-radius:6px;background:var(--pk-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.perk-txt .perk-title{font-size:13px;font-weight:700;margin-bottom:3px}
+.perk-txt .perk-desc{font-size:11px;color:var(--muted);line-height:1.6}
+.perk-badge{display:inline-block;margin-top:5px;font-size:9px;font-weight:700;padding:2px 8px;border-radius:2px;text-transform:uppercase;letter-spacing:0.4px}
+
+/* ── STORE PAGE ── */
+.store-hero{background:linear-gradient(110deg,#1A0A10,#3B1020);padding:1.5rem 1.25rem}
+.store-live{display:inline-flex;align-items:center;gap:5px;background:rgba(76,175,80,0.15);border:1px solid rgba(76,175,80,0.3);border-radius:2px;padding:4px 10px;font-size:10px;font-weight:700;color:#4CAF50;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px}
+.store-h{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+.store-h span{color:var(--pk)}
+.store-sub{font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:1.25rem}
+.store-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sa-btn{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:12px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:10px}
+.sa-btn:hover{border-color:var(--pk);background:rgba(255,23,116,0.1)}
+.sa-btn-ico{font-size:20px}
+.sa-btn-title{font-size:12px;font-weight:700;color:#fff}
+.sa-btn-sub{font-size:10px;color:rgba(255,255,255,0.35);margin-top:1px}
+
+.store-map-card{margin:1.25rem;background:#fff;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.smc-head{padding:12px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.smc-title{font-size:13px;font-weight:700}
+.smc-map{background:#FBF7F8;height:110px;position:relative;display:flex;align-items:center;justify-content:center}
+.map-hint{font-size:11px;color:var(--muted)}
+.aisle-pill{position:absolute;font-size:9px;font-weight:700;padding:4px 10px;border-radius:2px;color:#fff;letter-spacing:0.3px}
+
+.journey-wrap{padding:0 1.25rem 1.5rem}
+.jstep{display:flex;gap:12px;position:relative;padding-bottom:1.5rem}
+.jstep:last-child{padding-bottom:0}
+.jline{position:absolute;left:17px;top:38px;bottom:0;width:1px;background:var(--border)}
+.jstep:last-child .jline{display:none}
+.jnum{width:34px;height:34px;border-radius:50%;background:var(--pk-light);border:2px solid var(--pk);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--pk);flex-shrink:0;z-index:1}
+.jcontent{flex:1;padding-top:5px}
+.jtitle{font-size:13px;font-weight:700;margin-bottom:3px}
+.jdesc{font-size:11px;color:var(--muted);line-height:1.6}
+.jchips{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.jchip{font-size:9px;font-weight:700;padding:3px 8px;border-radius:2px;background:var(--pk-light);color:var(--pk);text-transform:uppercase;letter-spacing:0.3px}
+
+.bench-wrap{margin:0 1.25rem 1.5rem}
+.bench-table{width:100%;border-collapse:collapse;font-size:11px;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.bench-table th{background:#FAFAFA;padding:10px;text-align:left;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.4px;border-bottom:1px solid var(--border)}
+.bench-table td{padding:10px;border-bottom:1px solid var(--border);vertical-align:middle}
+.bench-table tr:last-child td{border-bottom:none}
+.bco{font-weight:700;font-size:12px}
+.bco.nykaa{color:var(--pk)}
+.chk{color:var(--green);font-weight:700}
+.crs{color:#E53935;font-weight:700}
+.par{color:var(--gold);font-weight:700}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{background:#fff;border-top:1px solid var(--border);display:flex;position:sticky;bottom:0;z-index:100}
+.bn-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px;cursor:pointer;font-size:9px;font-weight:700;color:var(--muted);letter-spacing:0.3px;text-transform:uppercase;border-top:2px solid transparent;transition:all 0.15s}
+.bn-item.active,.bn-item:hover{color:var(--pk);border-top-color:var(--pk)}
+.bn-item svg{width:20px;height:20px}
+</style>
+</head>
+<body>
+
+<div class="topbar">🎀 New Launch: Phygital 2.0 — Seamless Beauty, Online & In-Store</div>
+
+<!-- MAIN NAV -->
+<nav class="nav">
+  <!-- Nykaa SVG Wordmark (brand accurate) -->
+  <div class="nav-logo">
+    <svg class="logo-svg" viewBox="0 0 120 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="0" y="26" font-family="'Nunito Sans',sans-serif" font-weight="700" font-size="28" fill="#FF1774" letter-spacing="-0.5">nykaa</text>
+      <circle cx="112" cy="10" r="5" fill="#FF1774"/>
+    </svg>
+  </div>
+
+  <div class="nav-search">
+    <input type="text" placeholder="Search for products, brands and more..." readonly/>
+    <div class="search-btn">🔍</div>
+  </div>
+
+  <div class="nav-icons">
+    <div class="nav-icon" onclick="showPage('home',0)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+      Home
+    </div>
+    <div class="nav-icon" onclick="showPage('ai',1)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/></svg>
+      Profile
+    </div>
+    <div class="nav-icon" onclick="showPage('loyalty',2)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Rewards
+    </div>
+    <div class="nav-icon" onclick="showPage('store',3)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><circle cx="12" cy="14" r="2"/></svg>
+      Store
+    </div>
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Bag
+    </div>
+  </div>
+</nav>
+
+<!-- CATEGORY NAV -->
+<div class="cat-nav">
+  <div class="cat-item active">MAKEUP</div>
+  <div class="cat-item">SKINCARE</div>
+  <div class="cat-item">HAIRCARE</div>
+  <div class="cat-item">FRAGRANCE</div>
+  <div class="cat-item">WELLNESS</div>
+  <div class="cat-item">NYKAA FASHION</div>
+  <div class="cat-item">LUXE</div>
+  <div class="cat-item">MEN</div>
+  <div class="cat-item">OFFERS</div>
+</div>
+
+<!-- ══ PAGE: HOME ══ -->
+<div class="page active" id="page-home">
+
+  <div class="hero-banner">
+    <div>
+      <div class="hero-eyebrow">Product Vision 2025</div>
+      <h1 class="hero-h">Beauty, <span>Everywhere</span><br>You Are.</h1>
+      <p class="hero-sub">Introducing Nykaa Phygital 2.0 — your cart, your skin profile, and your rewards unified across online and every Nykaa store.</p>
+      <div>
+        <button class="btn-pk" onclick="showPage('ai',1)">Try AI Skin Match</button>
+        <button class="btn-ghost" onclick="showPage('store',3)">Explore Store Mode</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-badge-cluster">
+        <div class="hero-badge"><div class="hero-badge-num">35M+</div><div class="hero-badge-lbl">Customers</div><div class="hero-badge-delta">↑ 18% YoY</div></div>
+        <div class="hero-badge"><div class="hero-badge-num">200</div><div class="hero-badge-lbl">Stores</div><div class="hero-badge-delta">↑ 40 new</div></div>
+        <div class="hero-badge"><div class="hero-badge-num">23%</div><div class="hero-badge-lbl">Offline Rev.</div><div class="hero-badge-delta">Untapped</div></div>
+        <div class="hero-badge"><div class="hero-badge-num">2.1×</div><div class="hero-badge-lbl">Omni LTV</div><div class="hero-badge-delta">vs online-only</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OFFER STRIP -->
+  <div class="offer-strip">
+    <div class="offer-pill">🎀 PHYGITAL LAUNCH SALE</div>
+    <div class="offer-pill">AI Skin ID — FREE in stores</div>
+    <div class="offer-pill">Earn points online, spend in-store</div>
+    <div class="offer-pill">Try in-store → Ship home</div>
+    <div class="offer-pill">Beauty Concierge for Platinum</div>
+    <div class="offer-pill">Scan & earn in every Nykaa store</div>
+  </div>
+
+  <!-- FEAT STRIP -->
+  <div class="feat-strip">
+    <div class="feat-item"><div class="feat-icon">🧬</div><div class="feat-title">AI Skin Match</div><div class="feat-sub">Personalised for you</div></div>
+    <div class="feat-item"><div class="feat-icon">🏪</div><div class="feat-title">200+ Stores</div><div class="feat-sub">Store mode in app</div></div>
+    <div class="feat-item"><div class="feat-icon">💎</div><div class="feat-title">Unified Points</div><div class="feat-sub">Online + offline</div></div>
+    <div class="feat-item"><div class="feat-icon">🚀</div><div class="feat-title">Cart Continuity</div><div class="feat-sub">Zero friction checkout</div></div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="sec">
+    <div class="sec-head"><div class="sec-title">Shop by Category</div><div class="sec-viewall">VIEW ALL</div></div>
+    <div class="cat-grid">
+      <div class="cat-tile"><div class="cat-tile-img">💄</div><div class="cat-tile-label">Makeup</div></div>
+      <div class="cat-tile"><div class="cat-tile-img">🧴</div><div class="cat-tile-label">Skincare</div></div>
+      <div class="cat-tile"><div class="cat-tile-img">🌸</div><div class="cat-tile-label">Fragrance</div></div>
+      <div class="cat-tile"><div class="cat-tile-img">💇</div><div class="cat-tile-label">Haircare</div></div>
+    </div>
+  </div>
+
+  <!-- AI PICKS -->
+  <div class="sec" style="padding-top:0">
+    <div class="sec-head"><div class="sec-title">AI-Picked For You</div><div class="sec-viewall">VIEW ALL</div></div>
+    <div class="prod-row">
+      <div class="prod-card">
+        <div class="prod-img">🌟<div class="prod-wish">♡</div><div class="prod-badge">NEW</div></div>
+        <div class="prod-info">
+          <div class="prod-brand">Minimalist</div>
+          <div class="prod-name">Alpha Arbutin 2% Serum 30ml</div>
+          <div class="prod-price">₹599<span class="prod-mrp">₹799</span><span class="prod-disc">25% off</span></div>
+          <div class="prod-rating"><div class="rating-chip"><span class="rating-star">★</span>4.5</div><span class="rating-count">(2.1k)</span></div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-img">🌸<div class="prod-wish">♡</div></div>
+        <div class="prod-info">
+          <div class="prod-brand">Laneige</div>
+          <div class="prod-name">Water Sleeping Mask 70ml</div>
+          <div class="prod-price">₹2,800<span class="prod-mrp">₹3,200</span><span class="prod-disc">12% off</span></div>
+          <div class="prod-rating"><div class="rating-chip"><span class="rating-star">★</span>4.7</div><span class="rating-count">(4.3k)</span></div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-img">🍃<div class="prod-wish">♡</div><div class="prod-badge">BESTSELLER</div></div>
+        <div class="prod-info">
+          <div class="prod-brand">Kama Ayurveda</div>
+          <div class="prod-name">Kumkumadi Brightening Oil 12ml</div>
+          <div class="prod-price">₹2,050<span class="prod-mrp">₹2,295</span><span class="prod-disc">10% off</span></div>
+          <div class="prod-rating"><div class="rating-chip"><span class="rating-star">★</span>4.6</div><span class="rating-count">(8.7k)</span></div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-img">✨<div class="prod-wish">♡</div></div>
+        <div class="prod-info">
+          <div class="prod-brand">Dot & Key</div>
+          <div class="prod-name">Vitamin C Glow Moisturiser 85g</div>
+          <div class="prod-price">₹895<span class="prod-mrp">₹1,050</span><span class="prod-disc">14% off</span></div>
+          <div class="prod-rating"><div class="rating-chip"><span class="rating-star">★</span>4.3</div><span class="rating-count">(1.5k)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHYGITAL FEATURES -->
+  <div class="sec" style="padding-top:0">
+    <div class="sec-head"><div class="sec-title">New Phygital Features</div><div class="sec-viewall">VIEW ALL</div></div>
+    <div class="phy-grid">
+      <div class="phy-card" onclick="showPage('ai',1)">
+        <div class="phy-card-icon">🧬</div>
+        <div class="phy-card-title">AI Skin ID</div>
+        <div class="phy-card-desc">Camera-powered skin analysis. Profile follows you online and in-store.</div>
+        <div class="phy-card-tag tag-new">New</div>
+      </div>
+      <div class="phy-card" onclick="showPage('store',3)">
+        <div class="phy-card-icon">🗺️</div>
+        <div class="phy-card-title">Store Navigation</div>
+        <div class="phy-card-desc">AR aisle finder inside every Nykaa store via the app.</div>
+        <div class="phy-card-tag tag-beta">Beta</div>
+      </div>
+      <div class="phy-card" onclick="showPage('loyalty',2)">
+        <div class="phy-card-icon">💎</div>
+        <div class="phy-card-title">Unified Rewards</div>
+        <div class="phy-card-desc">Earn online, spend in-store. One loyalty programme everywhere.</div>
+        <div class="phy-card-tag tag-live">Live</div>
+      </div>
+      <div class="phy-card">
+        <div class="phy-card-icon">🛒</div>
+        <div class="phy-card-title">Cart Continuity</div>
+        <div class="phy-card-desc">Add online, buy in-store or ship home — no friction, no re-adding.</div>
+        <div class="phy-card-tag tag-new">New</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAVED CART -->
+  <div class="sec" style="padding-top:0">
+    <div class="sec-head"><div class="sec-title">Your Bag — Cross-Channel</div><div class="sec-viewall">VIEW BAG</div></div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:6px;padding:0 14px">
+      <div class="cart-item">
+        <div class="ci-img" style="background:linear-gradient(135deg,#C2185B22,#F0629222)">💄</div>
+        <div class="ci-info">
+          <div class="ci-brand">Charlotte Tilbury</div>
+          <div class="ci-name">Matte Revolution Lipstick — Pillow Talk</div>
+          <div class="ci-price">₹3,950 <span class="ci-tag ci-online">Added online</span></div>
+        </div>
+      </div>
+      <div class="cart-item">
+        <div class="ci-img">🌟</div>
+        <div class="ci-info">
+          <div class="ci-brand">Drunk Elephant</div>
+          <div class="ci-name">C-Firma Fresh Day Serum 30ml</div>
+          <div class="ci-price">₹4,200 <span class="ci-tag ci-store">Try in-store</span></div>
+        </div>
+      </div>
+      <div class="cart-item">
+        <div class="ci-img">✨</div>
+        <div class="ci-info">
+          <div class="ci-brand">Charlotte Tilbury</div>
+          <div class="ci-name">Airbrush Flawless Foundation — 6 Neutral</div>
+          <div class="ci-price">₹5,500 <span class="ci-tag ci-store">Check store stock</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAGE: AI ══ -->
+<div class="page" id="page-ai">
+  <div class="sec">
+    <div class="ai-skin-card">
+      <div class="ai-tag">AI Beauty Intelligence</div>
+      <div class="ai-h">Your Skin, Decoded.</div>
+      <div class="ai-sub">Real-time analysis synced across online & in-store. Your advisor sees this too.</div>
+      <div class="skin-attrs">
+        <div class="skin-attr"><div class="sa-lbl">Skin Tone</div><div class="sa-val">Medium Warm</div></div>
+        <div class="skin-attr"><div class="sa-lbl">Undertone</div><div class="sa-val">Golden</div></div>
+        <div class="skin-attr"><div class="sa-lbl">Concern</div><div class="sa-val">Pigmentation</div></div>
+        <div class="skin-attr"><div class="sa-lbl">Hydration</div><div class="sa-val">62%</div><div class="sa-bar"><div class="sa-fill" style="width:62%"></div></div></div>
+        <div class="skin-attr"><div class="sa-lbl">Oiliness</div><div class="sa-val">Combo</div><div class="sa-bar"><div class="sa-fill" style="width:48%"></div></div></div>
+        <div class="skin-attr"><div class="sa-lbl">Sensitivity</div><div class="sa-val">Low</div><div class="sa-bar"><div class="sa-fill" style="width:22%"></div></div></div>
+      </div>
+      <button class="btn-pk" style="font-size:12px;padding:9px 20px">Scan Again with Camera</button>
+    </div>
+
+    <div class="sec-head"><div class="sec-title">Matched For You — 98% accuracy</div><div class="sec-viewall">VIEW ALL</div></div>
+    <div class="prod-row">
+      <div class="prod-card"><div class="prod-img" style="background:#FEF3E2">🌟<div class="prod-badge">98% MATCH</div></div><div class="prod-info"><div class="prod-brand">Minimalist</div><div class="prod-name">Alpha Arbutin 2% Serum</div><div class="prod-price">₹599</div><div class="prod-rating"><div class="rating-chip"><span class="rating-star">★</span>4.5</div></div></div></div>
+      <div class="prod-card"><div class="prod-img" style="background:#FCE4EC">🌸<div class="prod-badge">94% MATCH</div></div><div class="prod-info"><div class="prod-brand">Laneige</div><div class="prod-name">Water Sleeping Mask</div><div class="prod-price">₹2,800</div><div class="prod-rating"><div class="rating-chip"><span class="rating-star">★</span>4.7</div></div></div></div>
+      <div class="prod-card"><div class="prod-img" style="background:#E8F5E9">🍃<div class="prod-badge">91% MATCH</div></div><div class="prod-info"><div class="prod-brand">Kama Ayurveda</div><div class="prod-name">Kumkumadi Oil</div><div class="prod-price">₹2,050</div><div class="prod-rating"><div class="rating-chip"><span class="rating-star">★</span>4.6</div></div></div></div>
+      <div class="prod-card"><div class="prod-img" style="background:#EDE7F6">✨<div class="prod-badge">89% MATCH</div></div><div class="prod-info"><div class="prod-brand">Dot & Key</div><div class="prod-name">Vitamin C Moisturiser</div><div class="prod-price">₹895</div><div class="prod-rating"><div class="rating-chip"><span class="rating-star">★</span>4.3</div></div></div></div>
+    </div>
+
+    <div style="background:#fff;border:1px solid var(--border);border-radius:6px;padding:14px;margin-top:1rem">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--pk)">How your profile travels with you</div>
+      <div style="display:flex;gap:0;align-items:center;flex-wrap:wrap">
+        <div style="flex:1;min-width:80px;text-align:center;padding:10px 6px">
+          <div style="font-size:22px;margin-bottom:4px">📸</div>
+          <div style="font-size:10px;font-weight:700;color:var(--text)">Scan in app</div>
+        </div>
+        <div style="color:var(--border);font-size:18px">›</div>
+        <div style="flex:1;min-width:80px;text-align:center;padding:10px 6px">
+          <div style="font-size:22px;margin-bottom:4px">🧬</div>
+          <div style="font-size:10px;font-weight:700;color:var(--text)">AI builds profile</div>
+        </div>
+        <div style="color:var(--border);font-size:18px">›</div>
+        <div style="flex:1;min-width:80px;text-align:center;padding:10px 6px">
+          <div style="font-size:22px;margin-bottom:4px">🏪</div>
+          <div style="font-size:10px;font-weight:700;color:var(--text)">Advisor sees it</div>
+        </div>
+        <div style="color:var(--border);font-size:18px">›</div>
+        <div style="flex:1;min-width:80px;text-align:center;padding:10px 6px">
+          <div style="font-size:22px;margin-bottom:4px">💄</div>
+          <div style="font-size:10px;font-weight:700;color:var(--text)">Matched anywhere</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAGE: LOYALTY ══ -->
+<div class="page" id="page-loyalty">
+  <div class="loy-card">
+    <div class="loy-top">
+      <div><div class="loy-tier">Nykaa Gold ✦</div><div class="loy-tier-sub">Your current tier</div></div>
+      <div class="loy-pts"><div class="loy-pts-n">4,850</div><div class="loy-pts-l">Nykaa Points</div></div>
+    </div>
+    <div class="loy-prog">
+      <div class="prog-labels"><span style="color:rgba(255,255,255,0.4);font-size:10px">Gold</span><span style="color:rgba(255,255,255,0.4);font-size:10px">Platinum — 7,050 pts</span></div>
+      <div class="prog-bar"><div class="prog-fill"></div></div>
+    </div>
+    <div class="sync-bar">
+      <div class="sync-dot"></div>
+      <div class="sync-txt"><strong>Points sync live</strong> — earn at any Nykaa store, spend on nykaa.com and vice versa.</div>
+    </div>
+  </div>
+
+  <div class="tier-row">
+    <div class="tier-col"><div class="tier-dot" style="background:#CD7F32"></div><div class="tier-name" style="color:#CD7F32">Bronze</div><div class="tier-range">0–2,000 pts</div><div class="tier-perk">5× points<br>Birthday gift</div></div>
+    <div class="tier-col"><div class="tier-dot" style="background:#B8860B"></div><div class="tier-name" style="color:#B8860B">Gold ← you</div><div class="tier-range">2,001–7,000 pts</div><div class="tier-perk">10× points<br>Free samples<br>Store events</div></div>
+    <div class="tier-col"><div class="tier-dot" style="background:#9E9E9E"></div><div class="tier-name" style="color:#9E9E9E">Platinum</div><div class="tier-range">7,001+ pts</div><div class="tier-perk">15× points<br>Beauty Concierge<br>Early access</div></div>
+  </div>
+
+  <div class="sec"><div class="sec-title" style="margin-bottom:1rem">Phygital Perks</div></div>
+  <div class="perk-list">
+    <div class="perk-item"><div class="perk-ico">🏪</div><div class="perk-txt"><div class="perk-title">In-Store Beauty Events</div><div class="perk-desc">Gold & Platinum members get exclusive invites to masterclasses and launch events at Nykaa stores, with points earned on every purchase.</div><div class="perk-badge" style="background:#FFF5E6;color:var(--gold)">Gold+</div></div></div>
+    <div class="perk-item"><div class="perk-ico">📦</div><div class="perk-txt"><div class="perk-title">Try In-Store, Ship Home</div><div class="perk-desc">Test a product at a Nykaa store. Love it? Have it shipped to your address — loyalty points applied automatically, no re-adding.</div><div class="perk-badge" style="background:#E8F5E9;color:var(--green)">All Tiers</div></div></div>
+    <div class="perk-item"><div class="perk-ico">💆</div><div class="perk-txt"><div class="perk-title">Beauty Concierge</div><div class="perk-desc">Platinum members get a dedicated advisor reachable on WhatsApp — same person, online and in-store. Inspired by Nordstrom Personal Stylist.</div><div class="perk-badge" style="background:#EDE7F6;color:#6A1B9A">Platinum</div></div></div>
+    <div class="perk-item"><div class="perk-ico">🎁</div><div class="perk-txt"><div class="perk-title">Scan & Earn In-Store</div><div class="perk-desc">Scan any product barcode at a Nykaa store with your app to earn bonus points, read reviews, and see your purchase history for that product.</div><div class="perk-badge tag-new" style="font-size:9px;font-weight:700;padding:2px 8px">New Feature</div></div></div>
+  </div>
+</div>
+
+<!-- ══ PAGE: STORE ══ -->
+<div class="page" id="page-store">
+  <div class="store-hero">
+    <div class="store-live"><div class="sync-dot" style="background:#4CAF50;width:6px;height:6px;animation:pulse 2s infinite"></div>Store mode active</div>
+    <div class="store-h">Nykaa <span>Select City Walk</span></div>
+    <div class="store-sub">📍 Saket, New Delhi · Open till 10 PM · Your wishlist is ready in-store</div>
+    <div class="store-actions">
+      <div class="sa-btn"><div class="sa-btn-ico">🗺️</div><div><div class="sa-btn-title">Navigate Store</div><div class="sa-btn-sub">AR aisle finder</div></div></div>
+      <div class="sa-btn"><div class="sa-btn-ico">👩‍💼</div><div><div class="sa-btn-title">Page Advisor</div><div class="sa-btn-sub">She has your profile</div></div></div>
+      <div class="sa-btn"><div class="sa-btn-ico">📷</div><div><div class="sa-btn-title">Scan & Learn</div><div class="sa-btn-sub">Point at any product</div></div></div>
+      <div class="sa-btn"><div class="sa-btn-ico">🛍️</div><div><div class="sa-btn-title">My Wishlist</div><div class="sa-btn-sub">3 items nearby</div></div></div>
+    </div>
+  </div>
+
+  <div class="store-map-card">
+    <div class="smc-head"><div class="smc-title">Store Map — Ground Floor</div><div style="display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--green)"><div class="sync-dot" style="background:var(--green);width:6px;height:6px;animation:pulse 2s infinite"></div>Live</div></div>
+    <div class="smc-map">
+      <div class="map-hint">Interactive Floor Map</div>
+      <div class="aisle-pill" style="top:16px;left:16px;background:var(--pk)">Skincare — A3</div>
+      <div class="aisle-pill" style="bottom:16px;right:16px;background:var(--green)">Makeup — B2</div>
+      <div class="aisle-pill" style="top:16px;right:50px;background:#1565C0">Fragrance — C1</div>
+    </div>
+  </div>
+
+  <div class="sec"><div class="sec-head"><div class="sec-title">The Phygital Journey</div></div></div>
+  <div class="journey-wrap">
+    <div class="jstep"><div class="jnum">1</div><div class="jline"></div><div class="jcontent"><div class="jtitle">Discovery — online</div><div class="jdesc">Customer finds products on Nykaa app, saves wishlist, gets AI skin recommendations.</div><div class="jchips"><div class="jchip">AI Skin Match</div><div class="jchip">Wishlist</div><div class="jchip">Personalisation</div></div></div></div>
+    <div class="jstep"><div class="jnum">2</div><div class="jline"></div><div class="jcontent"><div class="jtitle">Intent — Store Mode triggers</div><div class="jdesc">Geofence detects proximity to a Nykaa store. Wishlist converts to in-store list with live stock availability.</div><div class="jchips"><div class="jchip">Geofencing</div><div class="jchip">Stock Check</div><div class="jchip">Navigation</div></div></div></div>
+    <div class="jstep"><div class="jnum">3</div><div class="jline"></div><div class="jcontent"><div class="jtitle">Experience — assisted in-store</div><div class="jdesc">Beauty Advisor accesses customer's AI skin profile on their tablet. Recommends, demos, upsells intelligently.</div><div class="jchips"><div class="jchip">Advisor Tablet</div><div class="jchip">Skin Profile</div><div class="jchip">AR Try-On</div></div></div></div>
+    <div class="jstep"><div class="jnum">4</div><div class="jline"></div><div class="jcontent"><div class="jtitle">Purchase — frictionless</div><div class="jdesc">Pay in-store or choose home delivery. Loyalty points sync instantly. Digital receipt in app.</div><div class="jchips"><div class="jchip">Scan & Pay</div><div class="jchip">Points Sync</div><div class="jchip">Digital Receipt</div></div></div></div>
+    <div class="jstep"><div class="jnum">5</div><div class="jline"></div><div class="jcontent"><div class="jtitle">Retention — post-visit nudge</div><div class="jdesc">App sends refill reminders, routine tips, and "what to try next" based on in-store purchase.</div><div class="jchips"><div class="jchip">Refill Alerts</div><div class="jchip">Routine Builder</div><div class="jchip">Re-engagement</div></div></div></div>
+  </div>
+
+  <div class="bench-wrap">
+    <div class="sec-head" style="margin-bottom:0.75rem"><div class="sec-title">Competitive Benchmark</div></div>
+    <table class="bench-table">
+      <thead><tr><th>Feature</th><th class="nykaa" style="color:var(--pk)">Nykaa 2.0</th><th>Sephora</th><th>Ulta</th><th>Purplle</th></tr></thead>
+      <tbody>
+        <tr><td>AI Skin Analysis</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="par">~</span></td><td><span class="crs">✗</span></td></tr>
+        <tr><td>Unified Loyalty</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="crs">✗</span></td></tr>
+        <tr><td>In-Store Navigation</td><td><span class="chk">✓</span></td><td><span class="par">~</span></td><td><span class="crs">✗</span></td><td><span class="crs">✗</span></td></tr>
+        <tr><td>Cart Continuity</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="par">~</span></td><td><span class="crs">✗</span></td></tr>
+        <tr><td>Advisor Tablet (skin profile)</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="crs">✗</span></td><td><span class="crs">✗</span></td></tr>
+        <tr><td>Scan & Earn In-Store</td><td><span class="chk">✓</span></td><td><span class="crs">✗</span></td><td><span class="par">~</span></td><td><span class="crs">✗</span></td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:10px;color:var(--muted);margin-top:6px;text-align:center">✓ Full &nbsp;~ Partial &nbsp;✗ Not available</div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <div class="bn-item active" id="bn-home" onclick="showPage('home',0)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+    Home
+  </div>
+  <div class="bn-item" id="bn-ai" onclick="showPage('ai',1)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/></svg>
+    AI Advisor
+  </div>
+  <div class="bn-item" id="bn-loyalty" onclick="showPage('loyalty',2)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    Rewards
+  </div>
+  <div class="bn-item" id="bn-store" onclick="showPage('store',3)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><circle cx="12" cy="14" r="2"/></svg>
+    Store Mode
+  </div>
+</div>
+
+<script>
+function showPage(id, idx){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const bns=['bn-home','bn-ai','bn-loyalty','bn-store'];
+  if(idx>=0) document.getElementById(bns[idx]).classList.add('active');
+}
+</script>
+</body>
+</html>
